@@ -21,12 +21,12 @@ while True:
             break
     
     files[name] = {'url': url, 'name': name}
-print(files)
 
 print('Start downloading...')
 for key, value in files.items():
     
     with open(value['name'], 'wb') as f:
+        print('Downloading: ' + value['name'])
         r = requests.get(value['url'], stream=True, allow_redirects=True)
         total_length = r.headers.get('content-length')
 
@@ -41,5 +41,3 @@ for key, value in files.items():
                 done = int(50 * dl / total_length)
                 sys.stdout.write("\r[%s%s]" % ('=' * done, ' ' * (50-done)))
                 sys.stdout.flush()
-
-            
